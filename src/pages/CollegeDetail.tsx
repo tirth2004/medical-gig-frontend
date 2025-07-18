@@ -81,7 +81,7 @@ export default function CollegeDetail() {
         {/* Left: Tabs and Content */}
         <div className="flex-1">
           {/* Tabs */}
-          <div className="flex gap-2 border-b mb-4">
+          <div className="flex gap-2 border-b mb-4 overflow-x-auto whitespace-nowrap -mx-2 px-2">
             {TABS.map((tab) => (
               <button
                 key={tab.key}
