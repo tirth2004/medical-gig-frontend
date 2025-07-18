@@ -1,0 +1,162 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+const TABS = [
+  { key: "intro", label: "Introduction" },
+  { key: "course_fees", label: "Courses & Fees" },
+  { key: "admission_eligibility", label: "Admission & Eligibility" },
+  { key: "benefits", label: "Benefits" },
+  { key: "campus_info", label: "Campus Info" },
+  // { key: "reviews", label: "Reviews" },
+];
+
+interface College {
+  id: string;
+  name: string;
+  country: string;
+  state: string;
+  year_of_establishment: number;
+  intro: string;
+  course_fees: string;
+  admission_eligibility: string;
+  benefits: string;
+  campus_info: string;
+  created_at: string;
+  logo_link: string;
+  intake: string;
+  duration: string;
+  recognition: string;
+  medium: string;
+}
+
+export default function CollegeDetail() {
+  const { id } = useParams();
+  const [college, setCollege] = useState<College | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("intro");
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/colleges/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCollege(data.college);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <div className="text-center mt-8">Loading...</div>;
+  if (!college)
+    return <div className="text-center mt-8">College not found.</div>;
+
+  return (
+    <div className="max-w-7xl mx-auto px-2 sm:px-6 py-8">
+      {/* Banner */}
+      <div className="relative rounded-xl overflow-hidden shadow-lg mb-8">
+        <img
+          src={college.logo_link}
+          alt={college.name}
+          className="w-full h-56 object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+            {college.name}
+          </h1>
+          <div className="text-pink-200 font-semibold text-lg mt-1">
+            Year Of Establishment :{" "}
+            <span className="text-pink-400">
+              {college.year_of_establishment}
+            </span>
+          </div>
+          <button className="mt-4 self-end bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow">
+            Apply Now
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Left: Tabs and Content */}
+        <div className="flex-1">
+          {/* Tabs */}
+          <div className="flex gap-2 border-b mb-4">
+            {TABS.map((tab) => (
+              <button
+                key={tab.key}
+                className={`px-4 py-2 font-semibold border-b-2 transition ${
+                  activeTab === tab.key
+                    ? "border-blue-600 text-blue-600 bg-white"
+                    : "border-transparent text-gray-600 hover:text-blue-600"
+                }`}
+                onClick={() => setActiveTab(tab.key)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          {/* Tab Content */}
+          <div className="bg-white rounded-lg shadow p-4 mb-6 markdown max-w-none">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {String(college[activeTab as keyof College])?.replace(
+                /\n/g,
+                "\n"
+              ) || "No data available."}
+            </ReactMarkdown>
+          </div>
+        </div>
+        {/* Right: Sidebar Form */}
+        <div className="w-full lg:w-96 flex-shrink-0">
+          <div className="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 className="text-xl font-bold text-blue-700 mb-4">
+              Get Free Counselling
+            </h2>
+            <form className="flex flex-col gap-4">
+              <div>
+                <label className="block font-semibold mb-1">Full Name *</label>
+                <input
+                  type="text"
+                  className="w-full border rounded px-3 py-2"
+                  placeholder="Full Name"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Phone *</label>
+                <div className="flex">
+                  <span className="inline-flex items-center px-2 bg-gray-100 border border-r-0 rounded-l">
+                    🇮🇳 +91
+                  </span>
+                  <input
+                    type="tel"
+                    className="w-full border rounded-r px-3 py-2"
+                    placeholder="Phone"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">
+                  Select State *
+                </label>
+                <input
+                  type="text"
+                  className="w-full border rounded px-3 py-2"
+                  placeholder="Please Select Preferred State"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import FacebookIcon from "@mui/icons-material/Facebook";
