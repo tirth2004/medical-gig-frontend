@@ -14,6 +14,8 @@ import EditCountry from "./pages/EditCountry";
 import AdminColleges from "./pages/AdminColleges";
 import AddCollege from "./pages/AddCollege";
 import EditCollege from "./pages/EditCollege";
+import BlogDetailedView from "./pages/BlogDetailedView";
+import AllBlogs from "./pages/AllBlogs";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -63,6 +65,24 @@ function App() {
             <>
               <Header />
               <CompareCollege />
+            </>
+          }
+        />
+        <Route
+          path="/blogs/:id"
+          element={
+            <>
+              <Header />
+              <BlogDetailedView />
+            </>
+          }
+        />
+        <Route
+          path="/allblogs"
+          element={
+            <>
+              <Header />
+              <AllBlogs />
             </>
           }
         />
