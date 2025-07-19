@@ -8,6 +8,9 @@ import CollegeDetail from "./pages/CollegeDetail";
 import CompareCollege from "./pages/CompareCollege";
 import AdminLogin from "./pages/AdminLogin";
 import AdminHome from "./pages/AdminHome";
+import AdminCountries from "./pages/AdminCountries";
+import AddCountry from "./pages/AddCountry";
+import EditCountry from "./pages/EditCountry";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -68,6 +71,30 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminHome />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/countries"
+          element={
+            <ProtectedRoute>
+              <AdminCountries />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/countries/add"
+          element={
+            <ProtectedRoute>
+              <AddCountry />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/countries/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditCountry />
             </ProtectedRoute>
           }
         />

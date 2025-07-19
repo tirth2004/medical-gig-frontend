@@ -61,10 +61,28 @@ export default function AdminHome() {
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">
                 Hello, {adminUser.username}!
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-6">
                 Welcome to the admin dashboard. Here you can manage countries
                 and colleges.
               </p>
+
+              {/* Admin Actions */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button
+                  onClick={() => navigate("/admin/countries")}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2"
+                >
+                  <span className="text-xl">🏳️</span>
+                  Modify Countries
+                </button>
+                <button
+                  onClick={() => navigate("/admin/colleges")}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2"
+                >
+                  <span className="text-xl">🎓</span>
+                  Modify Colleges
+                </button>
+              </div>
             </div>
           </div>
         </div>

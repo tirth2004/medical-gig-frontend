@@ -2,3 +2,7 @@
 .markdown > * {
   all: revert;
 }
+
+._contentEditable_sects_380 > * {
+  all: revert;
+}
