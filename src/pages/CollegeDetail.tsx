@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -38,7 +38,7 @@ export default function CollegeDetail() {
   const [activeTab, setActiveTab] = useState("intro");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/colleges/${id}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/colleges/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setCollege(data.college);

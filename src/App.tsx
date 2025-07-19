@@ -6,17 +6,71 @@ import CountryDetail from "./pages/CountryDetail";
 import AllCountry from "./pages/AllCountry";
 import CollegeDetail from "./pages/CollegeDetail";
 import CompareCollege from "./pages/CompareCollege";
+import AdminLogin from "./pages/AdminLogin";
+import AdminHome from "./pages/AdminHome";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/countries/:id" element={<CountryDetail />} />
-        <Route path="/all-country" element={<AllCountry />} />
-        <Route path="/colleges/:id" element={<CollegeDetail />} />
-        <Route path="/compare-colleges" element={<CompareCollege />} />
+        {/* Public Routes */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <HomePage />
+            </>
+          }
+        />
+        <Route
+          path="/countries/:id"
+          element={
+            <>
+              <Header />
+              <CountryDetail />
+            </>
+          }
+        />
+        <Route
+          path="/all-country"
+          element={
+            <>
+              <Header />
+              <AllCountry />
+            </>
+          }
+        />
+        <Route
+          path="/colleges/:id"
+          element={
+            <>
+              <Header />
+              <CollegeDetail />
+            </>
+          }
+        />
+        <Route
+          path="/compare-colleges"
+          element={
+            <>
+              <Header />
+              <CompareCollege />
+            </>
+          }
+        />
+
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin/home"
+          element={
+            <ProtectedRoute>
+              <AdminHome />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

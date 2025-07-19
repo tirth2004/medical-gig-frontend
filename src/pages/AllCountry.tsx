@@ -22,7 +22,7 @@ export default function AllCountry() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/colleges")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/colleges`)
       .then((res) => res.json())
       .then((data) => {
         setColleges(data.colleges || []);

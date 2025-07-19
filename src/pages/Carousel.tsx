@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 interface College {
@@ -40,7 +40,7 @@ export default function Carousel() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/colleges")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/colleges`)
       .then((res) => res.json())
       .then((data) => setColleges(data.colleges || []));
   }, []);
