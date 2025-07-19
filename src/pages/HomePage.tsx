@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import FlagDiv from "../components/FlagDiv";
+import Carousel from "./Carousel";
+import Comparison from "./Comparison";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 console.log("Backend URL: ", BACKEND_URL);
@@ -124,6 +126,8 @@ export default function HomePage() {
           </div>
         )}
       </div>
+      <Carousel />
+      <Comparison />
     </>
   );
 }
