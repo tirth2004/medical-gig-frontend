@@ -11,6 +11,9 @@ import AdminHome from "./pages/AdminHome";
 import AdminCountries from "./pages/AdminCountries";
 import AddCountry from "./pages/AddCountry";
 import EditCountry from "./pages/EditCountry";
+import AdminColleges from "./pages/AdminColleges";
+import AddCollege from "./pages/AddCollege";
+import EditCollege from "./pages/EditCollege";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -95,6 +98,30 @@ function App() {
           element={
             <ProtectedRoute>
               <EditCountry />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/colleges"
+          element={
+            <ProtectedRoute>
+              <AdminColleges />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/colleges/add"
+          element={
+            <ProtectedRoute>
+              <AddCollege />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/colleges/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditCollege />
             </ProtectedRoute>
           }
         />
