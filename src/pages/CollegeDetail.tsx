@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import InterestDialogBox from "../components/InterestDialogBox";
 
 const TABS = [
   { key: "intro", label: "Introduction" },
@@ -36,6 +37,15 @@ export default function CollegeDetail() {
   const [college, setCollege] = useState<College | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("intro");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleApplyNow = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/colleges/${id}`)
@@ -70,7 +80,10 @@ export default function CollegeDetail() {
               {college.year_of_establishment}
             </span>
           </div>
-          <button className="mt-4 self-end bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow">
+          <button
+            onClick={handleApplyNow}
+            className="mt-4 self-end bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow"
+          >
             Apply Now
           </button>
         </div>
@@ -123,27 +136,53 @@ export default function CollegeDetail() {
                 />
               </div>
               <div>
-                <label className="block font-semibold mb-1">Phone *</label>
-                <div className="flex">
-                  <span className="inline-flex items-center px-2 bg-gray-100 border border-r-0 rounded-l">
-                    🇮🇳 +91
-                  </span>
-                  <input
-                    type="tel"
-                    className="w-full border rounded-r px-3 py-2"
-                    placeholder="Phone"
-                    required
-                  />
-                </div>
+                <label className="block font-semibold mb-1">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  className="w-full border rounded px-3 py-2"
+                  placeholder="Phone Number"
+                  required
+                />
               </div>
               <div>
                 <label className="block font-semibold mb-1">
-                  Select State *
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  className="w-full border rounded px-3 py-2"
+                  placeholder="Email Address"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Country *</label>
+                <input
+                  type="text"
+                  className="w-full border rounded px-3 py-2"
+                  placeholder="Country"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">State *</label>
+                <input
+                  type="text"
+                  className="w-full border rounded px-3 py-2"
+                  placeholder="State"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">
+                  College of Interest *
                 </label>
                 <input
                   type="text"
                   className="w-full border rounded px-3 py-2"
-                  placeholder="Please Select Preferred State"
+                  placeholder="College of Interest"
                   required
                 />
               </div>
@@ -157,6 +196,9 @@ export default function CollegeDetail() {
           </div>
         </div>
       </div>
+
+      {/* Interest Dialog Box */}
+      <InterestDialogBox isOpen={isDialogOpen} onClose={handleCloseDialog} />
     </div>
   );
 }

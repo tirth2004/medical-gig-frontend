@@ -16,6 +16,10 @@ import AddCollege from "./pages/AddCollege";
 import EditCollege from "./pages/EditCollege";
 import BlogDetailedView from "./pages/BlogDetailedView";
 import AllBlogs from "./pages/AllBlogs";
+import AdminBlogs from "./pages/AdminBlogs";
+import AddBlog from "./pages/AddBlog";
+import EditBlog from "./pages/EditBlog";
+import AdminCustomers from "./pages/AdminCustomers";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -142,6 +146,38 @@ function App() {
           element={
             <ProtectedRoute>
               <EditCollege />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/blogs"
+          element={
+            <ProtectedRoute>
+              <AdminBlogs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/blogs/add"
+          element={
+            <ProtectedRoute>
+              <AddBlog />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/blogs/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditBlog />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/customers"
+          element={
+            <ProtectedRoute>
+              <AdminCustomers />
             </ProtectedRoute>
           }
         />

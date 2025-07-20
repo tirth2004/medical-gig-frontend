@@ -165,6 +165,11 @@ function CarouselCard({ college, slideWidth }: CarouselCardProps) {
         <button
           className="text-white font-bold py-2 px-4 rounded-full text-sm"
           style={{ backgroundColor: "#9de86f", color: "black" }}
+          onClick={() => {
+            // Dispatch custom event to open dialog
+            const event = new CustomEvent("openApplyDialog");
+            window.dispatchEvent(event);
+          }}
         >
           Apply Now
         </button>
